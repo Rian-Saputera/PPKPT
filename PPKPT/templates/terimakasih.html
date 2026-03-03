@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Terima Kasih - PPKPT Yarsi Pratama University</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #8c8c8c, #e95500);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: #fff;
+      }
+
+      .container {
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        animation: slideDown 1.5s ease-out;
+      }
+
+      p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        animation: fadeInUp 2s ease-in-out;
+      }
+
+      .countdown {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 20px;
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Background animation */
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        animation: float 10s infinite;
+      }
+
+      .circle:nth-child(1) {
+        width: 150px;
+        height: 150px;
+        top: 10%;
+        left: 20%;
+        animation-delay: 0s;
+      }
+      .circle:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 70%;
+        animation-delay: 2s;
+      }
+      .circle:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        top: 80%;
+        left: 30%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-30px) rotate(180deg);
+        }
+        100% {
+          transform: translateY(0) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background animated circles -->
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <div class="container">
+      <h1>Terima Kasih 🙏</h1>
+      <p>
+        Laporan Anda telah diterima oleh
+        <strong>Satgas PPKPT Yarsi Pratama University</strong>.<br />
+        Identitas Anda tetap dilindungi dan laporan akan ditindaklanjuti sesuai
+        prosedur secara aman dan rahasia.
+      </p>
+      <div class="countdown">
+        Mengalihkan kembali dalam <span id="timer">10</span> detik...
+      </div>
+    </div>
+
+    <script>
+      let timeLeft = 10;
+      const timerEl = document.getElementById("timer");
+
+      const countdown = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          window.location.href = "/pelaporan"; // balik ke halaman pelaporan
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

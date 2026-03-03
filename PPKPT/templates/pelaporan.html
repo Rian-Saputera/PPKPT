@@ -1,0 +1,1553 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PPKPT — Yarsi Pratama University</title>
+    <meta
+      name="description"
+      content="PPKPT Kampus: Pencegahan dan Penanganan Kekerasan di Perguruan Tinggi — Yarsi Pratama University."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Brand palette — red/orange/grey/white */
+        --red: #e50914;
+        --red-600: #d40812;
+        --orange: #ff6a00;
+        --orange-600: #e55f00;
+        --grey-50: #f7f7f8;
+        --grey-100: #f2f3f5;
+        --grey-300: #d1d5db;
+        --grey-500: #6b7280;
+        --grey-700: #374151;
+        --black: #120e0b;
+        --white: #ffffff;
+
+        /* Accents */
+        --accent: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
+        --accent-soft: linear-gradient(
+          135deg,
+          rgba(229, 9, 20, 0.12) 0%,
+          rgba(255, 106, 0, 0.12) 100%
+        );
+
+        /* Layout */
+        --maxw: 1200px;
+        --radius: 16px;
+        --radius-sm: 12px;
+        --shadow-1: 0 10px 30px rgba(11, 13, 18, 0.08);
+        --shadow-2: 0 20px 50px rgba(11, 13, 18, 0.12);
+
+        /* Motion */
+        --dur-fast: 180ms;
+        --dur: 320ms;
+        --dur-slow: 600ms;
+        --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          "Noto Sans",
+          "Liberation Sans",
+          sans-serif;
+        color: var(--black);
+        background: var(--white);
+        line-height: 1.6;
+      }
+
+      /* Top bar */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 999; /* lebih tinggi biar aman */
+        backdrop-filter: none; /* matikan blur */
+        background-color: #fff; /* putih solid */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .nav {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 14px 20px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand .mark {
+        width: 80px;
+        height: 80px;
+        object-fit: contain; /* biar logo proporsional */
+        border-radius: 10px; /* opsional, kalau mau rounded */
+        box-shadow: var(--shadow-1);
+      }
+      .brand .mark::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          120px 60px at 20% 20%,
+          rgba(255, 255, 255, 0.35),
+          transparent 60%
+        );
+        mix-blend-mode: screen;
+      }
+      .brand .title {
+        font-weight: 900;
+        letter-spacing: 0.2px;
+        font-size: 15px;
+      }
+      .navlinks {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        margin-right: -100px;
+      }
+      .navlinks a {
+        text-decoration: none;
+        color: var(--grey-700);
+        font-weight: 600;
+        padding: 8px 1px;
+        border-radius: 10px;
+        transition: all var(--dur) var(--ease);
+        font-size: 15px; /* sebelumnya 16–18px */
+        font-weight: 600;
+
+        position: relative;
+      }
+      .navlinks a:hover {
+        color: var(--red);
+        background: var(--grey-100);
+      }
+      .navlinks a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--red);
+        transition: width 0.3s ease;
+      }
+      .navlinks a:hover::after {
+        width: 100%;
+      }
+
+      /* Right logo (as requested: pojok kanan atas) */
+      .campus-logo {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .campus-logo img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        box-shadow: var(--shadow-1);
+        object-fit: cover;
+      }
+      .campus-logo .name {
+        font-weight: 700;
+        color: var(--grey-700);
+        display: none; /* show on desktop only */
+      }
+
+      /* Hamburger (mobile) */
+      .hamburger {
+        display: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: #ffff;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all var(--dur) var(--ease);
+      }
+      .hamburger:hover {
+        background: var(--grey-100);
+      }
+      .hamburger .bars {
+        width: 20px;
+        height: 14px;
+        position: relative;
+      }
+      .hamburger .bars span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--black);
+        border-radius: 2px;
+        transition: all var(--dur) var(--ease);
+      }
+      .hamburger .bars span:nth-child(1) {
+        top: 0;
+      }
+      .hamburger .bars span:nth-child(2) {
+        top: 6px;
+      }
+      .hamburger .bars span:nth-child(3) {
+        top: 12px;
+      }
+      .hamburger.active .bars span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      .hamburger.active .bars span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active .bars span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      /* Mobile drawer */
+      .drawer {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: 86%;
+        max-width: 360px;
+        background-color: #fff; /* solid putih */
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.12);
+        transform: translateX(110%);
+        transition: transform var(--dur) var(--ease);
+        z-index: 9999; /* pastikan di atas layer lain */
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .drawer.open {
+        transform: translateX(0);
+      }
+      .drawer-header {
+        padding: 16px 18px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .drawer-links {
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .drawer-links a {
+        padding: 12px 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--grey-700);
+        font-weight: 600;
+      }
+      .drawer-links a:hover {
+        background: var(--grey-100);
+        color: var(--red);
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.7)),
+          /* lapisan putih transparan */ url("../static/gedungyarsi.jpg"); /* gambar hero */
+        background-size: cover;
+        background-position: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .hero-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 64px 20px 40px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(28px, 4.6vw, 52px);
+        line-height: 1.08;
+        margin: 0 0 14px;
+        letter-spacing: -0.5px;
+      }
+      .hero p {
+        color: var(--grey-700);
+        font-size: clamp(16px, 2.2vw, 18px);
+        margin: 0 0 22px;
+      }
+      .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all var(--dur) var(--ease);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: var(--white);
+        border: none;
+        box-shadow: var(--shadow-1);
+      }
+      .btn-primary:hover {
+        filter: brightness(1.05);
+      }
+      .btn-ghost {
+        color: var(--red);
+        background: var(--grey-100);
+      }
+      .btn-ghost:hover {
+        background: var(--grey-300);
+      }
+
+      /* Hero visual — animated cards */
+      .visual {
+        position: relative;
+        min-height: 320px;
+        display: grid;
+        place-items: center;
+      }
+      /* Animasi masuk (fade + slide + scale) */
+      @keyframes rise {
+        0% {
+          transform: translateY(40px) scale(0.95);
+          opacity: 0;
+        }
+        60% {
+          transform: translateY(-6px) scale(1.02);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+      .card * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .card {
+        width: 86%;
+        max-width: 520px;
+        background: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-2);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 18px;
+        opacity: 0;
+        animation: rise 0.8s var(--ease) forwards;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden; /* biar gelombang tetap di dalam */
+        z-index: 1;
+      }
+
+      /* Delay untuk card berikutnya */
+      .card + .card {
+        margin-top: 14px;
+        animation-delay: 0.35s;
+      }
+
+      /* Hover effect keren */
+      .card:hover {
+        transform: translateY(-8px) rotate3d(1, 1, 0, 2deg) scale(1.03);
+        box-shadow:
+          0 12px 24px rgba(0, 0, 0, 0.15),
+          0 0 12px rgba(255, 68, 0, 0.25); /* glow merah */
+      }
+
+      /* Judul & teks */
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+        transition: color 0.3s ease;
+      }
+      .card p {
+        margin: 0;
+        color: var(--grey-700);
+        transition: color 0.3s ease;
+      }
+
+      /* Hover text effect */
+      .card:hover h3 {
+        color: var(--red);
+      }
+      .card:hover p {
+        color: var(--grey-900);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -50%;
+        width: 200%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          #e55f00,
+          transparent 70%
+        );
+        animation: wave 6s linear infinite;
+        z-index: 0;
+      }
+      @keyframes wave {
+        0% {
+          transform: translateX(0) translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateX(-25%) translateY(5%) rotate(10deg);
+        }
+        100% {
+          transform: translateX(0) translateY(0) rotate(0deg);
+        }
+      }
+
+      /* Sections */
+      section {
+        margin: 0 auto;
+        padding: 48px 20px;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .section-title .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--red);
+        box-shadow: 0 0 0 6px rgba(229, 9, 20, 0.12);
+      }
+      .section-title h2 {
+        margin: 0;
+        font-size: clamp(22px, 3.6vw, 32px);
+        letter-spacing: -0.2px;
+      }
+      .lead {
+        color: var(--grey-700);
+        margin-bottom: 18px;
+      }
+
+      /* Grid cards */
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .col-4 {
+        grid-column: span 4;
+      }
+      .col-6 {
+        grid-column: span 6;
+      }
+      .col-12 {
+        grid-column: span 12;
+      }
+      .tile {
+        background: var(--white);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-1);
+        padding: 18px;
+        transition:
+          transform var(--dur) var(--ease),
+          box-shadow var(--dur) var(--ease);
+      }
+      .tile:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-2);
+      }
+      .tile h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      .tile p {
+        margin: 0;
+        color: var(--grey-700);
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+        background: var(--grey-100);
+        color: var(--grey-700);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        margin-bottom: 10px;
+      }
+      .badge.red {
+        background: rgba(229, 9, 20, 0.08);
+        color: var(--red);
+        border-color: rgba(229, 9, 20, 0.18);
+      }
+      .badge.orange {
+        background: rgba(255, 106, 0, 0.1);
+        color: var(--orange);
+        border-color: rgba(255, 106, 0, 0.22);
+      }
+
+      /* Partners */
+      .partners {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(6, 1fr);
+      }
+      .partner {
+        background: var(--white);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        box-shadow: var(--shadow-1);
+        transition: transform var(--dur) var(--ease);
+      }
+      .partner:hover {
+        transform: translateY(-4px);
+      }
+      .partner img {
+        width: 72px;
+        height: 72px;
+        object-fit: cover;
+        border-radius: 50%;
+        background: var(--grey-300);
+        margin-bottom: 10px;
+      }
+      .partner .label {
+        font-weight: 700;
+        color: var(--grey-700);
+      }
+
+      /* Reporting form */
+      .report {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        background: #ff7b00;
+        border: 1px solid rgba(229, 9, 20, 0.18);
+        border-radius: var(--radius);
+        padding: 18px;
+      }
+      .report .info {
+        padding: 10px 12px;
+      }
+      .report .info h3 {
+        margin: 0 0 8px;
+      }
+      .report .info p {
+        margin: 0 0 10px;
+        color: var(--grey-700);
+      }
+      form {
+        background: var(--white);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-1);
+        padding: 16px;
+      }
+      .field {
+        margin-bottom: 12px;
+      }
+      .field label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--grey-300);
+        outline: none;
+        transition:
+          border-color var(--dur) var(--ease),
+          box-shadow var(--dur) var(--ease);
+        font-size: 14px;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--red);
+        box-shadow: 0 0 0 4px rgba(229, 9, 20, 0.12);
+      }
+      .helper {
+        font-size: 12px;
+        color: var(--grey-500);
+      }
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-top: 8px;
+      }
+      .status {
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #747474;
+        color: #fff;
+        padding: 40px 20px;
+        font-family: "Segoe UI", sans-serif;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-top {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .footer-top .logo {
+        max-width: 120px;
+        margin-bottom: 10px;
+      }
+
+      .footer-columns {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .footer-column h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #ffcc00;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 8px;
+      }
+
+      .footer-column ul li a {
+        color: #000000;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-column ul li a:hover {
+        color: #fff;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #444;
+        padding-top: 20px;
+        text-align: center;
+      }
+
+      .social-icons a {
+        margin: 0 10px;
+        display: inline-block;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .footer-columns {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .footer-column {
+          margin-bottom: 20px;
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .campus-logo .name {
+          display: none;
+        }
+      }
+      @media (max-width: 860px) {
+        .nav {
+          grid-template-columns: auto 1fr auto;
+        }
+        .navlinks {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .partners {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .grid .col-4 {
+          grid-column: span 6;
+        }
+        .grid .col-6 {
+          grid-column: span 12;
+        }
+        .report {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 520px) {
+        .partners {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .campus-logo img {
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      /* Subtle scroll reveal */
+      .reveal {
+        max-width: var(--maxw);
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all var(--dur-slow) var(--ease);
+        text-align: center;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* ini yang bikin ke tengah */
+        gap: 10px; /* jarak antara dot dan teks */
+        text-align: center;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .video-section {
+        position: relative;
+        padding: 60px 20px;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+        overflow: hidden;
+        border-radius: 5px;
+
+        /* Animated gradient background */
+        background: linear-gradient(135deg, #fd6100, #ff6200, #989898, #515151);
+        background-size: 400% 400%;
+        animation: gradientMove 12s ease infinite;
+      }
+
+      /* Floating particles */
+      .video-section::before,
+      .video-section::after {
+        content: "";
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        filter: blur(60px);
+        animation: float 10s infinite alternate ease-in-out;
+      }
+
+      .video-section::before {
+        top: -50px;
+        left: -50px;
+      }
+
+      .video-section::after {
+        bottom: -60px;
+        right: -40px;
+        animation-duration: 14s;
+      }
+
+      /* Glassmorphism container */
+      .video-card {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .video-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Title */
+      .section-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 35px;
+        line-height: 1.4;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Grid */
+      .video-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+
+      .video-card iframe {
+        width: 100%;
+        height: 260px;
+        border: none;
+        border-radius: 10px;
+      }
+
+      /* Animations */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(40px, -40px);
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .video-card iframe {
+          height: 200px;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+      }
+      .fullwidth-section {
+        position: relative;
+        width: 100vw;
+        background: linear-gradient(135deg, #ff6f00, #ff5500);
+        padding: 60px 20px;
+        color: white;
+        border-radius: 15px;
+      }
+
+      /* GRID */
+      .feature-grid {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* CARD */
+      .feature-card {
+        flex: 1 1 250px;
+        max-width: 300px;
+        text-align: center;
+        padding: 10px;
+        background: #f2f3f5;
+        border-radius: 12px;
+        backdrop-filter: blur(6px);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-6px);
+      }
+
+      .feature-card img {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 15px;
+      }
+
+      .feature-card p {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .feature-grid {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .feature-card {
+          flex: none; /* FIX: hilangkan flex-basis 250px */
+          width: 100%; /* biar full */
+          max-width: 90%;
+        }
+
+        .feature-card img {
+          width: 300px; /* 50px terlalu kecil → naikkan */
+          height: 250px;
+        }
+
+        .feature-card p {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Topbar -->
+    <header class="topbar" role="banner" aria-label="Navigasi utama">
+      <nav class="nav">
+        <div class="brand">
+          <img src="../static/logo - Copy.png" alt="Logo PPKPT" class="mark" />
+          <div class="title">PPKPT Yarsi Pratama University</div>
+        </div>
+
+        <div class="navlinks" aria-label="Menu">
+          <a href="#tentang">Tentang</a>
+          <a href="#tujuan">Tujuan</a>
+          <a href="#jenis">Jenis Kekerasan</a>
+          <a href="#peran">Peran Satgas</a>
+          <a href="#hukum">Dasar Hukum</a>
+          <a href="#langkah">Jika Mengalami</a>
+          <a href="#mitra">Kerja Sama</a>
+          <a href="#lapor">Pelaporan</a>
+        </div>
+
+        <!-- Right logo (pojok kanan atas) -->
+        <div class="campus-logo" aria-label="Logo kampus">
+          <img src="../static/yarsi.png" alt="Logo Yarsi Pratama University" />
+          <span class="name">Yarsi Pratama University</span>
+        </div>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" aria-label="Buka menu" aria-expanded="false">
+          <div class="bars"><span></span><span></span><span></span></div>
+        </button>
+      </nav>
+
+      <!-- Mobile drawer -->
+      <aside class="drawer" aria-hidden="true" aria-label="Menu seluler">
+        <div class="drawer-header">
+          <div
+            class="mark"
+            aria-hidden="true"
+            style="width: 28px; height: 28px; border-radius: 8px"
+          ></div>
+          <strong>PPKPT Yarsi Pratama</strong>
+        </div>
+        <div class="drawer-links">
+          <a href="#tentang">Tentang</a>
+          <a href="#tujuan">Tujuan</a>
+          <a href="#jenis">Jenis Kekerasan</a>
+          <a href="#peran">Peran Satgas</a>
+          <a href="#hukum">Dasar Hukum</a>
+          <a href="#langkah">Jika Mengalami</a>
+          <a href="#mitra">Kerja Sama</a>
+          <a href="#lapor">Pelaporan</a>
+        </div>
+      </aside>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1>PPKPT Kampus—Aman, Inklusif, dan Berkeadilan</h1>
+          <p>
+            Satuan tugas Pencegahan dan Penanganan Kekerasan di Perguruan Tinggi
+            (PPKPT) Yarsi Pratama University bertugas mencegah, menangani, dan
+            mendampingi kasus kekerasan seksual, fisik, psikis, diskriminasi,
+            serta membangun budaya kampus yang beradab dan setara.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#lapor">Lapor Aman Sekarang</a>
+            <a class="btn btn-ghost" href="#hukum">Baca Dasar Hukum</a>
+          </div>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <div class="card">
+            <h3>Edukasi & Kampanye</h3>
+            <p>
+              Meningkatkan kesadaran anti-kekerasan melalui materi, pelatihan,
+              dan kegiatan kampus.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Pelaporan Rahasia</h3>
+            <p>
+              Saluran pelaporan aman, rahasia, dan responsif—melindungi
+              identitas pelapor.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Pendampingan Menyeluruh</h3>
+            <p>
+              Dukungan psikologis, hukum, dan akademik bagi korban untuk
+              pemulihan yang adil.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Tentang PPKPT Kampus</h2>
+      </div>
+      <p class="lead">
+        PPKPT adalah sistem di universitas yang dibentuk berdasarkan
+        Permendikbudristek No. 55 Tahun 2024 untuk mencegah dan menangani
+        berbagai bentuk kekerasan (seksual, fisik, psikis, diskriminasi) di
+        lingkungan kampus, menciptakan lingkungan yang aman, inklusif, serta
+        memberikan edukasi dan pendampingan bagi civitas akademika. PPKPT juga
+        menggantikan kebijakan sebelumnya seperti Permendikbudristek 30/2021.
+      </p>
+      <div class="grid">
+        <div class="tile col-6">
+          <span class="badge red">Mandat</span>
+          <h3>Permendikbudristek No. 55 Tahun 2024</h3>
+          <p>
+            Menjadi dasar hukum pembentukan dan pelaksanaan tugas PPKPT di
+            perguruan tinggi.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <span class="badge orange">Budaya</span>
+          <h3>Kampus Beradab & Setara</h3>
+          <p>
+            Membangun ekosistem yang menghargai martabat setiap individu dan
+            menolak segala bentuk kekerasan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tujuan -->
+    <section id="tujuan" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Tujuan Utama PPKPT</h2>
+      </div>
+      <div class="grid">
+        <div class="tile col-4">
+          <h3>Aman & Inklusif</h3>
+          <p>
+            Menciptakan lingkungan kampus yang aman, inklusif, dan bebas dari
+            kekerasan.
+          </p>
+        </div>
+        <div class="tile col-4">
+          <h3>Hak & Kenyamanan</h3>
+          <p>
+            Memastikan hak setiap warga kampus untuk mendapatkan lingkungan yang
+            nyaman dan setara.
+          </p>
+        </div>
+        <div class="tile col-4">
+          <h3>Edukasi Berkelanjutan</h3>
+          <p>
+            Mendorong literasi anti-kekerasan melalui program edukasi dan
+            kampanye.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="video-section" class="video-section">
+      <div class="container">
+        <h2 class="section-title">
+          VIDEO EDUKATIF PENCEGAHAN PENANGGULANGAN KEKERASAN DI LINGKUNGAN
+          <br />YARSI PRATAMA UNIVERSITY
+        </h2>
+
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/OQU48FWHlkM"
+              title="Seri Edukasi Permen PPKS"
+              allowfullscreen
+            >
+            </iframe>
+            <p class="video-caption">
+              Seri Edukasi Permen PPKS: Pencegahan Kekerasan
+            </p>
+          </div>
+
+          <div class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/z50C11sHxBw"
+              title="Hentikan Kekerasan Seksual"
+              allowfullscreen
+            >
+            </iframe>
+            <p class="video-caption">Hentikan Kekerasan Seksual</p>
+          </div>
+          <div class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/bPpwv5kohuU"
+              title="Hentikan Kekerasan Seksual"
+              allowfullscreen
+            >
+            </iframe>
+            <p class="video-caption">#GerakBersama - Berani Bicara</p>
+          </div>
+          <div class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/YPGomPg2qAA"
+              title="Hentikan Kekerasan Seksual"
+              allowfullscreen
+            >
+            </iframe>
+            <p class="video-caption">Jangan Menyalahkan Korban</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Jenis Kekerasan -->
+    <section id="jenis" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Jenis Kekerasan yang Ditangani</h2>
+      </div>
+      <div class="grid">
+        <div class="tile col-6">
+          <h3>Kekerasan Seksual</h3>
+          <p>
+            Pelecehan verbal/non-verbal, sentuhan tak diinginkan, ancaman
+            seksual, dan bentuk lain yang melanggar martabat.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Kekerasan Fisik</h3>
+          <p>Tindakan yang menyebabkan luka atau rasa sakit secara fisik.</p>
+        </div>
+        <div class="tile col-6">
+          <h3>Kekerasan Psikis</h3>
+          <p>
+            Perilaku yang menimbulkan tekanan mental, intimidasi, atau trauma
+            psikologis.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Diskriminasi & Intoleransi</h3>
+          <p>
+            Perlakuan tidak adil berdasarkan identitas, keyakinan, atau latar
+            belakang.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Peran Satgas -->
+    <section id="peran" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Peran Satgas PPKPT</h2>
+      </div>
+      <div class="grid">
+        <div class="tile col-6">
+          <h3>Edukasi & Kampanye</h3>
+          <p>
+            Menyebarkan kesadaran anti-kekerasan di kampus melalui materi,
+            pelatihan, dan kegiatan.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Pelaporan Aman</h3>
+          <p>
+            Menyediakan layanan pelaporan yang rahasia dan aman, melindungi
+            identitas pelapor.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Pendampingan</h3>
+          <p>
+            Memberikan dukungan psikologis, hukum, dan akademik bagi korban.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Penanganan Kasus</h3>
+          <p>
+            Melakukan pemeriksaan, klarifikasi, dan rekomendasi penyelesaian
+            kasus secara adil.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dasar Hukum -->
+    <section id="hukum" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Dasar Hukum</h2>
+      </div>
+      <div class="tile">
+        <h3>Permendikbudristek No. 55 Tahun 2024</h3>
+        <p>
+          Peraturan tentang Pencegahan dan Penanganan Kekerasan di Lingkungan
+          Perguruan Tinggi sebagai landasan PPKPT.
+        </p>
+      </div>
+    </section>
+    <section class="fullwidth-section">
+      <div class="feature-grid">
+        <div class="feature-card">
+          <img src="../static/2.png" alt="SK & Kebijakan" />
+        </div>
+        <div class="feature-card">
+          <img src="../static/3.png" alt="Cerdas Berkarakter" />
+        </div>
+        <div class="feature-card">
+          <img src="../static/1.png" alt="Laporkan" />
+        </div>
+      </div>
+    </section>
+    <!-- Jika Mengalami Kekerasan -->
+    <section id="langkah" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Apa yang Harus Dilakukan Jika Mengalami Kekerasan</h2>
+      </div>
+      <div class="grid">
+        <div class="tile col-6">
+          <h3>Bertindak (jika aman)</h3>
+          <p>
+            Tegur pelaku, dokumentasikan bukti (waktu, tempat, saksi, tangkapan
+            layar).
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Cari Dukungan</h3>
+          <p>
+            Ceritakan pada orang terpercaya—teman, keluarga, atau dosen
+            pembimbing.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Konseling</h3>
+          <p>
+            Hubungi psikolog atau tenaga profesional untuk dukungan emosional
+            dan pemulihan.
+          </p>
+        </div>
+        <div class="tile col-6">
+          <h3>Lapor ke Satgas PPKPT</h3>
+          <p>
+            Gunakan saluran pelaporan resmi kampus untuk penanganan yang cepat
+            dan rahasia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kerja Sama (Polisi & Kementerian) -->
+    <section id="mitra" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Kerja Sama Strategis</h2>
+      </div>
+      <p class="lead">
+        Kolaborasi dengan lembaga penegak hukum dan kementerian untuk memastikan
+        penanganan kasus yang komprehensif.
+      </p>
+      <div class="partners" aria-label="Mitra lembaga">
+        <div class="partner">
+          <img
+            src="../static/polisi.png"
+            alt="Logo Kepolisian Republik Indonesia"
+          />
+          <div class="label">Kepolisian Republik Indonesia</div>
+        </div>
+        <div class="partner">
+          <img
+            src="../static/pendidikan.png"
+            alt="Logo Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi"
+          />
+          <div class="label">Kemendikbudristek</div>
+        </div>
+        <div class="partner">
+          <img
+            src="../static/anak.png"
+            alt="Logo Kementerian Pemberdayaan Perempuan dan Perlindungan Anak"
+          />
+          <div class="label">Kementerian PPPA</div>
+        </div>
+        <div class="partner">
+          <img src="../static/komnas.jpg" alt="Logo Komnas Perempuan" />
+          <div class="label">Komnas Perempuan</div>
+        </div>
+        <div class="partner">
+          <img src="../static/lpsk.png" alt="Logo LPSK" />
+          <div class="label">LPSK</div>
+        </div>
+        <div class="partner">
+          <img src="../static/kemenkes.png" alt="Logo Kemenkes" />
+          <div class="label">Kemenkes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pelaporan -->
+    <section id="lapor" class="reveal">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h2>Pelaporan Aman & Rahasia</h2>
+      </div>
+      <div class="report" role="region" aria-label="Form pelaporan PPKPT">
+        <div class="info">
+          <h3>Prinsip Pelaporan</h3>
+          <p>
+            Identitas pelapor dilindungi. Informasi hanya diakses oleh Satgas
+            PPKPT untuk penanganan kasus.
+          </p>
+          <p class="helper">
+            Gunakan email non-pribadi jika ingin anonim. Sertakan bukti
+            pendukung bila tersedia.
+          </p>
+        </div>
+
+        <!-- form diarahkan ke /pelaporan -->
+        <form
+          id="reportForm"
+          action="/pelaporan"
+          method="POST"
+          enctype="multipart/form-data"
+          novalidate
+        >
+          <div class="field">
+            <label for="jenis">Jenis Kekerasan</label>
+            <select id="jenis" name="jenis" required>
+              <option value="">Pilih jenis</option>
+              <option value="Kekerasan Seksual">Kekerasan Seksual</option>
+              <option value="Kekerasan Fisik">Kekerasan Fisik</option>
+              <option value="Kekerasan Psikis">Kekerasan Psikis</option>
+              <option value="Diskriminasi & Intoleransi">
+                Diskriminasi & Intoleransi
+              </option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="tanggal">Tanggal Kejadian</label>
+            <input type="date" id="tanggal" name="tanggal" required />
+          </div>
+
+          <div class="field">
+            <label for="lokasi">Lokasi Kejadian</label>
+            <input
+              type="text"
+              id="lokasi"
+              name="lokasi"
+              placeholder="Contoh: Gedung A, lantai 2"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="kronologi">Kronologi Singkat</label>
+            <textarea
+              id="kronologi"
+              name="kronologi"
+              rows="4"
+              placeholder="Tuliskan kronologi kejadian..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label for="kontak">Kontak (opsional)</label>
+            <input
+              type="text"
+              id="kontak"
+              name="kontak"
+              placeholder="Email/No HP (boleh kosong/anonim)"
+            />
+          </div>
+
+          <div class="field">
+            <label for="bukti">Bukti (opsional)</label>
+            <input type="file" id="bukti" name="bukti" />
+            <div class="helper">
+              Jika kosong, Satgas akan memproses laporan anonim sesuai prosedur.
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Kirim Laporan</button>
+            <span id="formStatus" class="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-top">
+        <img
+          src="../static/logo_-_Copy-removebg-preview.png"
+          alt="Logo Yarsi Pratama University"
+          class="logo"
+        />
+        <h2>Direktorat Kemahasiswaan, Karier, dan Alumni</h2>
+        <p>
+          Gedung Pusat Yarsi Pratama University<br />
+          Jl. Aria Jaya Santika No. 7, Pasir Nangka, Kec. Tigaraksa, Kabupaten
+          Tangerang, Banten
+        </p>
+      </div>
+
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Halaman</h3>
+          <ul>
+            <li><a href="#tentang">Profil</a></li>
+            <li><a href="#video-section">Berita</a></li>
+            <li><a href="#reportForm">Layanan</a></li>
+            <li><a href="/kontak">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Tautan Cepat</h3>
+          <ul>
+            <li><a href="#tentang">Hotline Satgas PPKPT</a></li>
+            <li><a href="https://wa.link/47fh7h">Konseling</a></li>
+            <li>
+              <a href="https://www.yarsipratama.ac.id/?p=1374">Beasiswa</a>
+            </li>
+            <li>
+              <a href="https://pmb.yarsipratama.ac.id/">Pendaftaran</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Direktori</h3>
+          <ul>
+            <li>
+              <a href="https://www.yarsipratama.ac.id/"
+                >Website Yarsi Pratama</a
+              >
+            </li>
+            <li>
+              <a href="https://www.yarsipratama.ac.id/?page_id=1750"
+                >Sistem Akademik</a
+              >
+            </li>
+            <li>
+              <a href="https://www.yarsipratama.ac.id/?page_id=461"
+                >Visi & Misi</a
+              >
+            </li>
+            <li>
+              <a href="https://www.yarsipratama.ac.id/?m=20251112">PKKMB</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Direktorat Kemahasiswaan, Karier dan Alumni</p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile drawer toggle
+      const hamburger = document.querySelector(".hamburger");
+      const drawer = document.querySelector(".drawer");
+      const drawerLinks = drawer.querySelectorAll("a");
+
+      function toggleDrawer() {
+        const active = hamburger.classList.toggle("active");
+        drawer.classList.toggle("open", active);
+        hamburger.setAttribute("aria-expanded", active ? "true" : "false");
+        drawer.setAttribute("aria-hidden", active ? "false" : "true");
+      }
+      hamburger.addEventListener("click", toggleDrawer);
+      drawerLinks.forEach((a) =>
+        a.addEventListener("click", () => {
+          if (drawer.classList.contains("open")) toggleDrawer();
+        }),
+      );
+
+      // Scroll reveal
+      const reveals = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.12 },
+      );
+      reveals.forEach((el) => io.observe(el));
+      // Keyboard accessibility for hamburger
+      hamburger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") toggleDrawer();
+      });
+    </script>
+  </body>
+</html>

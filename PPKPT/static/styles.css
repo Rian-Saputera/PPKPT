@@ -1,0 +1,118 @@
+/* Reset dasar */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px 0; /* 👉 beri ruang atas–bawah untuk phone-box */
+}
+
+/* Box utama */
+.phone-box {
+  width: 325px; /* ukuran tipikal layar HP */
+  max-width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0; /* 👉 margin atas–bawah tambahan */
+}
+
+/* Logo */
+.logo img {
+  width: 100%; /* otomatis menyesuaikan lebar box */
+  max-width: 280px; /* batas maksimal logo */
+  margin: 0 auto 10px auto; /* center + jarak bawah */
+  display: block;
+}
+
+/* Judul */
+.title h1 {
+  font-size: 1.2em;
+  color: #424242;
+  margin-bottom: 20px;
+}
+
+/* Section */
+.services,
+.social {
+  margin-top: 20px;
+}
+
+.services h2,
+.social h2 {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Service card */
+.service-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 6px 10px; /* lebih tipis atas–bawah */
+  margin-bottom: 8px;
+}
+
+.service-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px; /* sudut tipis */
+  margin-right: 12px;
+  object-fit: cover;
+}
+
+.service-info {
+  flex-grow: 1;
+}
+
+.service-info p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+/* WhatsApp icon */
+.wa-link img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.wa-link img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsif */
+@media (max-width: 480px) {
+  .phone-box {
+    width: 95%; /* isi hampir penuh layar HP */
+    padding: 15px; /* padding lebih kecil di mobile */
+  }
+
+  .service-card img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .wa-link img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .phone-box {
+    width: 420px; /* sedikit lebih besar di tablet/desktop */
+    padding: 25px;
+  }
+}
